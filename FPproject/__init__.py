@@ -1,0 +1,1 @@
+from FPproject.app import create_app
