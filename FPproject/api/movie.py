@@ -5,9 +5,6 @@ from FPproject.api import ApiView
 
 
 class MovieView(ApiView):
-    # def index(self):
-    #     return self.all()
-
     def all(self):
        return Movie.query.all()
 
