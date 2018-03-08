@@ -7,7 +7,7 @@ from FPproject.helper.code import Code
 from FPproject.models.seat import PlaySeat, SeatType
 from FPproject.models.order import Order, OrderStatus
 from datetime import datetime
-# 座位
+
 class SeatView(ApiView):
     # 功能1,生成订单，锁定座位
     @Validator(pid=int, sid=multi_int, price=int, orderno=str)
@@ -21,10 +21,10 @@ class SeatView(ApiView):
         if not play:
             return Code.play_does_not_exist,request.params
         if price < play.lowest_price:
-            return Code.prcice_less_than_the_lowest_price,request.params['price']  # 只传价格也可以
+            return Code.prcice_less_than_the_lowest_price,request.params['price']  
         locked_seats_num = PlaySeat.lock(orderno, pid, sid)  # 调用锁定功能
         if not locked_seats_num:
-            return Code.seat_lock_failed, {}  # 返回锁定失败192.168.80.152
+            return Code.seat_lock_failed, {}  
 
         order = Order.create(play.cid, pid, sid)
         order.seller_order_no = orderno
@@ -81,7 +81,7 @@ class SeatView(ApiView):
         order.tickets_num = len(seats)
         order.paid_time = datetime.now()
         order.status = OrderStatus.paid.value
-        order.gen_ticket_flag()  # 生成取票码
+        order.gen_ticket_flag() 
         order.save()
         return {'bought_seats_num': bought_seats_num,
                 'ticket_flag': order.ticket_flag}
