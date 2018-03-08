@@ -25,13 +25,10 @@ class CinemaView(ApiView):
 
     @Validator(cid=int)
     def halls(self):
-        # cid = request.args['cid']
         cid = request.params['cid']
         print(request.values['cid'])
         cinema = Cinema.get(cid)
         if not cinema:
-            # return 1, {'cid':cid}
-            # return 1, request.args
             return Code.cinema_does_not_exist, request.args
         cinema.halls = Hall.query.filter_by(cid=cid).all()
         return cinema
