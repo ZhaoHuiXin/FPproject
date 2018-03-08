@@ -3,7 +3,7 @@ import functools
 from flask import request, make_response, Response
 from flask.json import jsonify
 from FPproject.helper.code import Code
-from flask import current_app  # 它是全局的
+from flask import current_app 
 import time
 class ApiView(FlaskView):
     def before_request(self,name,**kwargs):
@@ -11,8 +11,8 @@ class ApiView(FlaskView):
 
     def after_request(self,name, response):
         current_app.logger.info('%s response time: %s'%(request.path,time.time()-self.request_start_time))
-        # print('%s response time: %s'%(request.path,(time.time()-self.request_start_time)))
         return response
+    
     @classmethod
     def make_proxy_method(cls, name):
         """Creates a proxy function that can be used by Flasks routing. The
@@ -49,12 +49,9 @@ class ApiView(FlaskView):
                     return response
 
             response = view(**request.view_args)
-#-------------------------------------------------------------------------------------
-            # 判断是否是一个Response对象
+
             if not isinstance(response, Response):
-                # 如果不是，则先获取它的类型
                 response_type = type(response)
-                # 如果是tuple类型
                 if response_type == tuple and len(response) > 1:
                     rc, _data = response  #rc ,return code
                     # return jsonify(rc=rc.value, msg=rc.name, data=_data)
@@ -63,11 +60,6 @@ class ApiView(FlaskView):
                     # return jsonify(rc=Code.succ.value, msg=Code.succ.name, data=response)
                     response = jsonify(rc=Code.succ.value, msg=Code.succ.name, data=response)
 
-
-
-# ----over----defined---------------------------------------------------------------------------------
-            # if not isinstance(response, Response):
-            #     response = make_response(response)
 
             after_view_name = "after_" + name
             if hasattr(i, after_view_name):
