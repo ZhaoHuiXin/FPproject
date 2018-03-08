@@ -9,14 +9,11 @@ class ProductionConfig(DefaultConfig):
     JSON_PRETTYPRINT_REGULAR = False
 
     SQLALCHEMY_ECHO = False
-    # SEND_LOGS = True
-    # EMAIL_HOST = 'smtp.exmail.qq.com'
     EMAIL_HOST = 'smtp.163.com'
-    # SERVER_EMAIL = 465
     # 端口
     EMAIL_PORT = 465
-    EMAIL_HOST_USER = SERVER_EMAIL = DEFAULT_FORM_EMAIL = 'momentszd@163.com'
-    EMAIL_HOST_PASSWORD = 'zhx521521'
+    EMAIL_HOST_USER = SERVER_EMAIL = DEFAULT_FORM_EMAIL = 'mome****@163.com'
+    EMAIL_HOST_PASSWORD = 'zhx******'
     EMAIL_USE_SSL = True
     # 接收邮箱
-    ADMINS = ['313193454@qq.com']
+    ADMINS = ['31******@qq.com']
