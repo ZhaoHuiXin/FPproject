@@ -77,7 +77,6 @@ class OrderView(ApiView):
             return Code.order_does_not_exist, {'orderno': orderno}
         order.play = Play.get(order.pid)
         order.movie = Movie.get(order.play.mid)
-        # 这里还要在PlaySeat中实现一个getby_orderno
         order.tickets = PlaySeat.getby_orderno(orderno)
         return order
 
