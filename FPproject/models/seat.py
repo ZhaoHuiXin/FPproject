@@ -58,8 +58,6 @@ class PlaySeat(db.Model, Model):
     cid = db.Column(db.Integer)
     hid = db.Column(db.Integer)
     pid = db.Column(db.Integer)
-
-# -------------------------------------------------------
     sid = db.Column(db.Integer)
     x = db.Column(db.Integer)
     y = db.Column(db.Integer)
@@ -69,7 +67,7 @@ class PlaySeat(db.Model, Model):
     seat_type = db.Column(db.String(16))
     love_seats = db.Column(db.String(16))
     status = db.Column(db.Integer, default=0, nullable=False, index=True)
-# ----------------------------------------------------------------
+
     lock_time = db.Column(db.DateTime)
     created_time = db.Column(db.DateTime, server_default= text('CURRENT_TIMESTAMP'))
 
@@ -86,7 +84,7 @@ class PlaySeat(db.Model, Model):
         self.love_seats = seat.love_seats
         self.status = seat.status
 
-    # 接口实现形式,事务性
+
     @classmethod
     def lock(cls, orderno, pid, sid_list):
         session = db.create_scoped_session()
@@ -118,7 +116,7 @@ class PlaySeat(db.Model, Model):
                 'status': SeatStatus.ok.value,
             }, synchronize_session=False)
 
-        # 取消订单时，保证同一订单的座位数量及id和生成该订单时一致，避免出现
+        # 取消订单时，保证同一订单的座位数量及id和生成该订单时一致
         if rows != len(sid_list):
             session.rollback()
             return 0  # 出现不一致就会回滚，发送解锁失败
