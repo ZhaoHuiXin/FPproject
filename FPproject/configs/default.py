@@ -1,7 +1,6 @@
 import os
 
 class DefaultConfig(object):
-    # BASE_DIR = os.path.abspath(os.path.join('../..', os.path.dirname(__file__)))
     BASE_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), '../../'))  # 前面的目录上升两级
 
     DEBUG = True
