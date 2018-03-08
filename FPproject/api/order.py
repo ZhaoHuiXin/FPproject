@@ -26,10 +26,10 @@ class OrderView(ApiView):
         if order.status != OrderStatus.paid.value:
             return  Code.order_not_paid_yet,{}
 
-        # validate校验验证码方法
+    
         if not order.validate(ticket_flag):
             return Code.ticket_flag_error,{'ticket_flag': ticket_flag}
-        # refund 退款方法，改变订单的属性
+  
         refund_num = PlaySeat.refund(orderno, order.pid, seats)
         if not refund_num:
             return Code.ticket_refund_failed,{}
@@ -55,7 +55,6 @@ class OrderView(ApiView):
         if order.status != OrderStatus.paid.value:
             return Code.order_not_paid_yet, {}
 
-        # validate校验验证码方法
         if not order.validate(ticket_flag):
             return Code.ticket_flag_error, {'ticket_flag': ticket_flag}
 
