@@ -81,7 +81,7 @@ class Cinema(db.Model,Model):
                         ps.put()
                     PlaySeat.commit()
         current_app.logger.info('creat test data done! cost %s seconds'% (time.time()-start_time))
-        # 测试时候不会输出，程序运行时候会输出
+     
 
 
 
