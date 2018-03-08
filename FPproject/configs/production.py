@@ -1,8 +1,3 @@
-# 开发环境
-# test环境
-# STG准上线环境，除了数据不同于上线环境，给测试和运行人员
-# 灰度环境，让一部分用户参与进来，灰度中的数据是真实的
-# A/B测试，老代码和新代码的对比，看新代码是否受欢迎
 # PRD
 from FPproject.configs.default import DefaultConfig
 
